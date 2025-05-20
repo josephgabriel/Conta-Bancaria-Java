@@ -1,0 +1,46 @@
+package MeuPacote;
+
+import java.util.Scanner;
+
+public class ContaBancaria {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        double saldo = 0;
+        
+        try {
+            System.out.print("Digite o valor para depósito: ");
+            double deposito = scanner.nextDouble();
+            
+            if (deposito < 0) {
+                throw new IllegalArgumentException("O valor do depósito não pode ser negativo.");
+            }
+            
+            saldo += deposito;
+            System.out.println("Depósito realizado com sucesso.");
+            System.out.println("Saldo atual: R$ " + saldo);
+            
+            System.out.print("Digite o valor para saque: ");
+            double saque = scanner.nextDouble();
+            
+            if (saque < 0) {
+                throw new IllegalArgumentException("O valor do saque não pode ser negativo.");
+            }
+            
+            if (saque > saldo) {
+                throw new IllegalArgumentException("Saldo insuficiente para realizar o saque.");
+            }
+            
+            saldo -= saque;
+            System.out.println("Saque realizado com sucesso.");
+            System.out.println("Saldo final: R$ " + saldo);
+            
+        } catch (IllegalArgumentException e) {
+            System.out.println("Erro: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Erro inesperado: " + e.getMessage());
+        } finally {
+            scanner.close();
+        }
+    }
+}
